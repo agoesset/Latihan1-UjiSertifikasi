@@ -13,16 +13,7 @@ use App\Http\Controllers\CustomerController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CustomerController::class, 'dashboard'])->name('dashboard');
 
-Route::middleware(['auth'])->group(function(){
-
-    Route::resource('customer', CustomerController::class);
-    Route::get('/customer/destroy/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('customer', CustomerController::class);
+Route::get('/customer/destroy/{id}', [CustomerController::class, 'delete'])->name('customer.delete');

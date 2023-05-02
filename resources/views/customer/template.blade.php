@@ -119,25 +119,13 @@
 											<span class="link-collapse">My Profile</span>
 										</a>
 									</li>
-									<li>
-									<a class="dropdown-item" href="{{ route('logout') }}"
-										onclick="event.preventDefault();
-										document.getElementById('logout-form').submit();">
-										<span class="link-collapse">Logout</span>
-									 </a>
- 
-									 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-										 @csrf
-									 </form>
-									</li>
- 
 								</ul>
 							</div>
 						</div>
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item active">
-							<a href="">
+							<a href="{{ route('dashboard') }}">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
 							</a>
@@ -157,7 +145,7 @@
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="">
+										<a href="{{ route('customer.index') }}">
 											<span class="sub-item">Data Customer</span>
 										</a>
 									</li>

@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class CustomerController extends Controller
 {
     public $customer;
     public function __construct()
     {
        $this->customer = new Customer;
+    }
+
+    public function dashboard()
+    {
+        $total = Customer::count();
+        $perkota = Customer::groupBy('kota')->select('kota', DB::raw('count(*) as total'))->get();
+
+        return view('dashboard', compact('total', 'perkota'));
     }
 
     public function index()
@@ -98,7 +106,12 @@ class CustomerController extends Controller
     
         }
         // simpan data menggunakan method save()
-        $update->customer = $request->nama;
+        $update->nama = $request->nama;
+        $update->email = $request->email;
+        $update->hp = $request->hp;
+        $update->alamat = $request->alamat;
+        $update->kota = $request->kota;
+        $update->perusahaan = $request->perusahaan;
         $update->save();
  
         // redirect halaman serta kirimkan pesan berhasil
